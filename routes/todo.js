@@ -4,7 +4,8 @@ const _ = require('lodash')
 const {
     addTodo,
     getTodo,
-    getAllTodos
+    getAllTodos,
+    updateTodo
 } = require('../api')
 
 const routes = () => {
@@ -49,7 +50,17 @@ const routes = () => {
     })
 
     router.put('/update/:id', (req, res) => {
-        res.send('Update Todo')
+        const params = req.params
+        const body = req.body
+
+        return updateTodo({ ...params, ...body}).then((result) => {
+            res.json({
+                data: result,
+                message: 'Successfully updated.'
+            })
+        }).catch(error => {
+            next(error)
+        })
     })
 
     router.delete('/delete/:id', (req, res) => {

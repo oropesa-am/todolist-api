@@ -3,7 +3,6 @@ const _ = require('lodash')
 
 module.exports = (payload) => {
     try {
-        
         const page = _.has(payload, 'page') ? payload.page : 1
         const pageSize = _.has(payload, 'pageSize') ? payload.pageSize : 10
         const sortName = _.has(payload, 'sortName') ? payload.sortName : 'createdAt'
