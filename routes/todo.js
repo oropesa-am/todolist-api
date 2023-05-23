@@ -5,7 +5,8 @@ const {
     addTodo,
     getTodo,
     getAllTodos,
-    updateTodo
+    updateTodo,
+    deleteTodo
 } = require('../api')
 
 const routes = () => {
@@ -36,7 +37,7 @@ const routes = () => {
         })
     })
 
-    router.post('/create', (req, res, next) => {
+    router.post('/', (req, res, next) => {
         const body = req.body
 
         return addTodo(body).then((result) => {
@@ -49,7 +50,7 @@ const routes = () => {
         })
     })
 
-    router.put('/update/:id', (req, res) => {
+    router.put('/:id', (req, res, next) => {
         const params = req.params
         const body = req.body
 
@@ -63,8 +64,16 @@ const routes = () => {
         })
     })
 
-    router.delete('/delete/:id', (req, res) => {
-        res.send('Delete Todo')
+    router.delete('/:id', (req, res, next) => {
+        const params = req.params
+
+        return deleteTodo(params).then((result) => {
+            res.json({
+                message: 'Successfully deleted.'
+            })
+        }).catch(error => {
+            next(error)
+        })
     })
 
     return router
