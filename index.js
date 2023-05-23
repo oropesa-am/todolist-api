@@ -8,6 +8,7 @@ app.get('/', (req, res) => {
     res.send('TODO LIST API')
 })
 
+app.use(express.json());
 app.use('/api', routes())
 
 app.listen(port, () => {
