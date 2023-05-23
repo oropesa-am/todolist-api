@@ -33,16 +33,16 @@ module.exports = (sequelize, DataTypes) => {
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,
-      get() { return moment(this.getDataValue('createdAt')).format('YYYY-MM-DD HH:mm:ss'); },
+      get() { return this.getDataValue('createdAt') && moment(this.getDataValue('createdAt')).format('YYYY-MM-DD HH:mm:ss'); },
     },
     updatedAt: {
       allowNull: false,
       type: DataTypes.DATE,
-      get() { return moment(this.getDataValue('updatedAt')).format('YYYY-MM-DD HH:mm:ss'); },
+      get() { return this.getDataValue('updatedAt') && moment(this.getDataValue('updatedAt')).format('YYYY-MM-DD HH:mm:ss'); },
     },
     deletedAt: {
       type: DataTypes.DATE,
-      get() { return moment(this.getDataValue('deletedAt')).format('YYYY-MM-DD HH:mm:ss'); },
+      get() { return this.getDataValue('deletedAt') && moment(this.getDataValue('deletedAt')).format('YYYY-MM-DD HH:mm:ss'); },
     }
   }, {
     sequelize,

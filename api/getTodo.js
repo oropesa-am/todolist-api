@@ -1,12 +1,13 @@
 const { Todos } = require('../models')
 const _ = require('lodash')
 
+
 module.exports = (payload) => {
     try {
-        const text = _.has(payload, 'text') ? payload.text : null
+        const id = _.has(payload, 'id') ? payload.id : null
 
-        return Todos.create({
-            text
+        return Todos.findOne({
+            where: { id }
         })
     } catch(error) {
         throw error
